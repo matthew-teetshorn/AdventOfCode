@@ -81,4 +81,6 @@ int main() {
   clock_t end_time = clock();
   double elapsed = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
   printf("Elapsed time: %f\n", elapsed);
+
+  fclose(fp);
 }

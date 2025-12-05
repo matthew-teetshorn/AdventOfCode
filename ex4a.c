@@ -67,4 +67,6 @@ int main() {
   }
 
   printf("Roll Count: %d\n", rollCount);
+
+  fclose(fp);
 }
