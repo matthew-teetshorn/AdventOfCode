@@ -1,5 +1,6 @@
 *.out
 *.input
 *.sh
+*.ppm
 
 UnionFind/
