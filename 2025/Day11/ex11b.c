@@ -25,8 +25,8 @@ ENTRY createEntry() {
   static char keyStore[MAX_KEYS][KEY_LEN];
   static int ksIDX = 0;
   ENTRY e;
-  e.key  = keyStore[ksIDX++];
-  e.data = dataStore[ksIDX];
+  e.key  = keyStore[ksIDX];
+  e.data = dataStore[ksIDX++];
   return e;
 }
 
@@ -61,8 +61,8 @@ uint64_t countPaths(int startIndex, int fftSeen, int dacSeen) {
   for (int i = 0; i < numOutputs[startIndex]; i++) {
     for (int j = 0; j < NEL; j++) {
       if (!strcmp(nodeOutputs[startIndex][i], nodes[j])) {
-        int nextIndex = j;
-        *retval += countPaths(nextIndex, fftSeen, dacSeen);
+        int nextIndex  = j;
+        *retval       += countPaths(nextIndex, fftSeen, dacSeen);
       }
     }
   }
