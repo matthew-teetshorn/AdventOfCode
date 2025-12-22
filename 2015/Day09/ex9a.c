@@ -7,21 +7,28 @@
 #define MAX_LINE  15
 #define NUM_NODES 8
 
+typedef struct {
+  int min;
+  int max;
+} min_max_t;
+
 void swap(int *x, int *y) {
   int temp = *x;
   *x       = *y;
   *y       = temp;
 }
 
-int permute(int arr[NUM_NODES], int start, int end,
-            int dists[NUM_NODES][NUM_NODES]) {
+min_max_t permute(int arr[NUM_NODES], int start, int end,
+                  int dists[NUM_NODES][NUM_NODES]) {
   static int shortest = INT_MAX;
+  static int longest  = INT_MIN;
   int currDist        = 0;
   if (start == end) { /* permutation complete */
     for (int i = 0; i < end - 1; i++) {
       currDist += dists[arr[i]][arr[i + 1]];
     }
     if (currDist < shortest) shortest = currDist;
+    if (currDist > longest) longest = currDist;
   }
 
   for (int i = start; i < end; i++) {
@@ -30,7 +37,7 @@ int permute(int arr[NUM_NODES], int start, int end,
     swap(&arr[start], &arr[i]);
   }
 
-  return shortest;
+  return (min_max_t){shortest, longest};
 }
 
 int main() {
@@ -60,9 +67,10 @@ int main() {
   }
 
   double start_time = clock();
-  int shortest      = permute(permutations, 0, NUM_NODES, distances);
+  min_max_t paths   = permute(permutations, 0, NUM_NODES, distances);
   double end_time   = clock();
-  printf("Shortest dist: %d\n", shortest);
+  printf("Shortest dist: %d\n", paths.min);
+  printf("Longest  dist: %d\n", paths.max);
   printf("Solved in: %f milliseconds\n",
          (end_time - start_time) / CLOCKS_PER_SEC * 1000);
 }
