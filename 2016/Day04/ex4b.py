@@ -1,4 +1,11 @@
 from collections import Counter
+import string
+
+
+def make_translation(n: int):
+    alpha_lower = string.ascii_lowercase
+    shift = n % len(alpha_lower)
+    return str.maketrans(alpha_lower, alpha_lower[shift:] + alpha_lower[:shift])
 
 
 def main():
@@ -19,25 +26,14 @@ def main():
         checksum = checksum.rstrip("]")
         testcheck = "".join([item[0] for item in letter_counts[0:5]])
 
-        decoded_strings = []
         line_str = " ".join(chunks[0:-1])
 
         if checksum == testcheck:
-            dec_str_list = []
             total += int(sector_id)
-            rotation = int(sector_id) % 26
 
-            for c in line_str:
-                tempc = ord(c) + rotation
-                if tempc > ord("z"):
-                    dec_str_list.append(chr(tempc - ord("z") + ord("`")))
-                elif c == " ":
-                    dec_str_list.append(" ")
-                else:
-                    dec_str_list.append(chr(tempc))
+            decoded_string = line_str.translate(make_translation(int(sector_id)))
 
-            decoded_strings.append("".join(list(dec_str_list)))
-            if decoded_strings[-1] == target_room:
+            if decoded_string == target_room:
                 target_sector_id = sector_id
 
     print(f"Total of valid room ids: {total}")
