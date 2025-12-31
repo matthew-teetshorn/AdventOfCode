@@ -1,40 +1,31 @@
-import re
+# Process the string going forward, increasing weights of follow-on
+# characters as we reach each marker
+def process_linear(string: str) -> int:
+    weights = [1] * len(string)
+    length = 0
 
+    i = 0
+    while i < len(string):
+        if string[i] == "(":
+            start = i + 1
+            end = string[start:].find(")") + start
+            num, mult = map(int, string[start:end].split("x"))
+            next = end + 1
+            for j in range(next, next + num):
+                weights[j] *= mult
+            i = next
+        else:
+            length += weights[i]
+            i += 1
 
-# Decompress the first found marker
-# return: length of leading non-marker string and remaining string
-# This runs pretty slowly but does produce the right answer without running out of memory
-def process_chunk(string: str) -> tuple[int, str]:
-    working_list = re.split(r"\(([0-9]+)x([0-9]+)\)", string, maxsplit=1)
-    new_string = ""
-    pretext = working_list[0]
-    length = len(pretext)
-
-    if len(working_list) == 1:
-        return (length, new_string)
-
-    num_chars = int(working_list[1])
-    num_times = int(working_list[2])
-    posttext = working_list[3]
-    for _ in range(num_times):
-        new_string += posttext[:num_chars]
-    new_string += posttext[num_chars:]
-
-    return (length, new_string)
+    return length
 
 
 def main():
     with open("ex9.input", "r") as f:
         input = f.read().strip()
 
-    next_string = input
-    total_length = 0
-    while True:
-        length, next_string = process_chunk(next_string)
-        total_length += length
-        if next_string == "":
-            break
-
+    total_length = process_linear(input)
     print(f"Total length: {total_length}")
 
 
