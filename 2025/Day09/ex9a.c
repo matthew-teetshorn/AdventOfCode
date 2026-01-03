@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DIM 11
+#define DIM        11
 #define NUM_POINTS 495
 
 typedef struct {
@@ -29,6 +29,7 @@ int main() {
 
     sscanf(buffer, "%d,%d", &coords[i].x, &coords[i].y);
   }
+  fclose(fp);
 
   uint64_t currArea;
   uint64_t maxArea = 0;

@@ -7,7 +7,7 @@ int main() {
   FILE *fp;
   char input[WIDTH + 2];
   int beams[WIDTH] = {0};
-  int total = 0;
+  int total        = 0;
 
   fp = fopen("ex7.input", "r");
 
@@ -31,4 +31,5 @@ int main() {
   }
 
   printf("Total splits: %d\n", total);
+  fclose(fp);
 }

@@ -4,14 +4,14 @@
 #include <stdlib.h>
 
 #define MAX_LINE_LENGTH 100
-#define NUM_DIGITS 12
+#define NUM_DIGITS      12
 
 int main() {
   char buffer[MAX_LINE_LENGTH + 5];
   char lilBuffer[NUM_DIGITS + 1];
   uint64_t currentJoltage = 0;
-  uint64_t totalJoltage = 0;
-  char currMax = '0';
+  uint64_t totalJoltage   = 0;
+  char currMax            = '0';
   char *endptr; // for strtoull()
 
   FILE *fp;
@@ -30,11 +30,11 @@ int main() {
       for (int j = p; j <= MAX_LINE_LENGTH - NUM_DIGITS + i; j++) {
         if (buffer[j] > currMax) {
           currMax = buffer[j];
-          p = j;
+          p       = j;
         }
       }
       lilBuffer[i] = currMax;
-      currMax = '0';
+      currMax      = '0';
       ++p;
     }
 
@@ -44,9 +44,10 @@ int main() {
     }
 
     // printf("Current Joltage: %" PRIu64 "\n", currentJoltage);
-    totalJoltage += currentJoltage;
-    currentJoltage = 0;
+    totalJoltage   += currentJoltage;
+    currentJoltage  = 0;
   }
 
   printf("Total Joltage: %" PRIu64 "\n", totalJoltage);
+  fclose(fp);
 }

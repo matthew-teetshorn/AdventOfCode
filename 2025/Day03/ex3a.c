@@ -9,7 +9,7 @@ int main() {
   char *fMaxPtr, *sMaxPtr;
   char firstMax, secondMax;
   int currentJoltage = 0;
-  int totalJoltage = 0;
+  int totalJoltage   = 0;
 
   FILE *fp;
   fp = fopen("ex3.input", "r");
@@ -19,15 +19,15 @@ int main() {
   }
 
   while (fgets(buffer, MAX_LINE_LENGTH, fp) != NULL) {
-    firstMax = buffer[0];
+    firstMax  = buffer[0];
     secondMax = '0';
-    fMaxPtr = buffer;
-    sMaxPtr = fMaxPtr + 1;
+    fMaxPtr   = buffer;
+    sMaxPtr   = fMaxPtr + 1;
 
     while (*sMaxPtr != '\n') {
       if (*sMaxPtr > *fMaxPtr && *(sMaxPtr + 1) != '\n') {
-        fMaxPtr = sMaxPtr;
-        firstMax = *fMaxPtr;
+        fMaxPtr   = sMaxPtr;
+        firstMax  = *fMaxPtr;
         secondMax = '0';
       } else if (*sMaxPtr > secondMax) {
         secondMax = *sMaxPtr;
@@ -43,4 +43,5 @@ int main() {
   }
 
   printf("Total Joltage: %d\n", totalJoltage);
+  fclose(fp);
 }

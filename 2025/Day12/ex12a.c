@@ -83,6 +83,7 @@ int main() {
                 &region.numPcsByType[4], &region.numPcsByType[5]) != EOF) {
     regions[rIndex++] = region;
   }
+  fclose(fp);
   // clang-format on
 
   // Reduce the search space by ruling out regions that
