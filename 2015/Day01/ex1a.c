@@ -16,4 +16,5 @@ int main() {
     }
   }
   printf("Floor reached: %d\n", floor);
+  fclose(fp);
 }

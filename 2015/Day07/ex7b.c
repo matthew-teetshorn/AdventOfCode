@@ -235,4 +235,5 @@ int main() {
   // Cleanup
   regQuery(NULL, FREE, NULL);
   hdestroy();
+  fclose(fp);
 }

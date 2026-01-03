@@ -13,6 +13,7 @@ int main() {
 
   char buffer[MAX_LINE];
   fgets(buffer, MAX_LINE, fp);
+  fclose(fp);
   char *p    = buffer;
   int length = strlen(buffer);
 

@@ -35,6 +35,7 @@ int main() {
     newReindeer.currScore = 0;
     reindeers[index++]    = newReindeer;
   }
+  fclose(fp);
 
   for (int currTime = 1; currTime <= RACE_TIME_SECS; currTime++) {
     int currMaxDistance = 0;

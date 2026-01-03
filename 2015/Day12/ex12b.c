@@ -54,6 +54,7 @@ int main() {
 
   char buffer[MAX_LINE];
   fgets(buffer, MAX_LINE, fp);
+  fclose(fp);
 
   // read the json in to jansson json_t struct
   json_error_t error;

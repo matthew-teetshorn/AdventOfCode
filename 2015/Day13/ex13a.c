@@ -57,6 +57,7 @@ int main() {
     weight           *= plus_minus;
     graph[src][dest]  = weight;
   }
+  fclose(fp);
 
   for (int i = 0; i < NUM_GUESTS; i++) {
     for (int j = 0; j < NUM_GUESTS; j++) {

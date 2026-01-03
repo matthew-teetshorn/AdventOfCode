@@ -22,4 +22,5 @@ int main() {
   }
   printf("Floor reached: %d\n", floor);
   printf("Basement reached at step: %d\n", count);
+  fclose(fp);
 }

@@ -31,6 +31,7 @@ int main() {
     // clang-format on
     reindeers[index++] = newReindeer;
   }
+  fclose(fp);
 
   int maxDistance = 0;
   for (int i = 0; i < NUM_REINDEER; i++) {
