@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_LINE       4
 #define NUM_CONTAINERS 20
@@ -28,7 +29,9 @@ combination_t *addCombinationToList(combination_list_t *cList,
 
   combination_t *new = malloc(sizeof(combination_t));
   if (new == NULL) return NULL;
-  new->next = NULL;
+  new->next  = NULL;
+  new->index = 0;
+  memset(new->containers, 0, sizeof(int) * NUM_CONTAINERS);
 
   for (int i = 0; i < NUM_CONTAINERS; i++) {
     if (!addValueToCombination(new, combination->containers[i])) {
@@ -49,8 +52,6 @@ combination_t *addCombinationToList(combination_list_t *cList,
 void genCombinations(int *remainingContainers,
                      combination_t *currentCombination,
                      combination_list_t *cList, int length, int value) {
-  printf("Looking at: %d with value remaining: %d\n", *remainingContainers,
-         value);
   // Base case
   if (value == 0) {
     combination_t *c = addCombinationToList(cList, currentCombination);
@@ -139,7 +140,7 @@ int main() {
                   TARGET);
 
   int numCombinations = countCombinations(&cList);
-  printCombinations(&cList);
+  // printCombinations(&cList);
   printf("Num combinations found: %d\n", numCombinations);
 
   listFree(&cList);
