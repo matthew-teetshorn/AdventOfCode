@@ -1,31 +1,27 @@
-class Elf:
-    def __init__(self, index: int):
-        self.index = index
-        self.num_presents = 1
-
-    def steal(self, other):
-        self.num_presents += other.num_presents
-        other.num_presents = 0
-
-    def __repr__(self) -> str:
-        return f"Elf({self.index}): num_presents: {self.num_presents}"
-
-
 def main():
     num_elves = 3014387
-    num_elves = 100000
-    elves = [Elf(index) for index in range(1, num_elves + 1)]
+    elves = [1 for _ in range(num_elves)]
 
-    c_index = 0
-    while len(elves) != 1:
-        n_index = c_index + 1 if c_index != len(elves) - 1 else 0
-        curr_elf = elves[c_index]
-        next_elf = elves[n_index]
-        curr_elf.steal(next_elf)
-        elves.remove(next_elf)
-        c_index = (elves.index(curr_elf) + 1) % len(elves)
+    curr_elf = 0
+    winner = 0
+    while True:
+        next_elf = (curr_elf + 1) % num_elves
+        while elves[next_elf] == 0:
+            next_elf = (next_elf + 1) % num_elves
 
-    print(elves)
+        elves[curr_elf] += elves[next_elf]
+        elves[next_elf] = 0
+
+        if elves[curr_elf] == num_elves:
+            winner = curr_elf + 1
+            break
+
+        curr_elf = (curr_elf + 1) % num_elves
+
+        while elves[curr_elf] == 0:
+            curr_elf = (curr_elf + 1) % num_elves
+
+    print(winner)
 
 
 if __name__ == "__main__":
